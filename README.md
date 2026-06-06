@@ -1,116 +1,167 @@
 # AI Customer Feedback Analysis
 
-Production-ready NLP project for analyzing Amazon customer reviews. It detects the review and rating columns automatically, cleans review text, creates sentiment labels from star ratings, produces EDA reports, trains multiple ML models, and serves insights through a Streamlit application.
+> Production-ready NLP pipeline for analyzing Amazon customer reviews — from raw CSV to trained models and an interactive Streamlit dashboard.
 
-## Dataset
+---
 
-The repository includes `data/Amazon_Reviews.csv`. The loader supports review columns named `reviewText`, `review_body`, `Review Text`, `review`, or similar, and rating columns named `overall`, `star_rating`, `rating`, or similar. For this dataset, the detected columns are:
+## Overview
 
-- Text: `Review Text`
-- Rating: `Rating`
+This project automates the full sentiment analysis lifecycle: it auto-detects review and rating columns, cleans text, assigns sentiment labels from star ratings, generates EDA reports, trains and compares multiple ML classifiers, and surfaces insights through a multi-page Streamlit application.
 
-## Architecture
+**Detected columns for the included dataset:**
+
+| Field | Column Name |
+|-------|-------------|
+| Review Text | `Review Text` |
+| Star Rating | `Rating` |
+
+---
+
+## Project Structure
 
 ```text
 customer-feedback-analysis/
-|-- app.py
-|-- assets/
-|   |-- plots/
-|   `-- reports/
-|-- data/
-|   `-- Amazon_Reviews.csv
-|-- models/
-|-- notebooks/
-|-- src/
-|   |-- components/
-|   |-- exceptions.py
-|   |-- inference/
-|   |-- logger.py
-|   |-- pipeline/
-|   |-- preprocessing/
-|   |-- training/
-|   |-- visualization/
-|   |-- insights/
-|   `-- utils/
-|-- tests/
-|-- requirements.txt
-|-- runtime.txt
-|-- Dockerfile
-`-- README.md
+├── app.py                    # Streamlit entry point
+├── assets/
+│   ├── plots/                # Generated EDA plots
+│   └── reports/              # Profiling reports
+├── data/
+│   └── Amazon_Reviews.csv    # Source dataset
+├── models/                   # Saved model artifacts
+├── notebooks/                # Exploratory notebooks
+├── src/
+│   ├── components/
+│   ├── exceptions.py
+│   ├── inference/
+│   ├── insights/
+│   ├── logger.py
+│   ├── pipeline/
+│   ├── preprocessing/
+│   ├── training/
+│   ├── visualization/
+│   └── utils/
+├── tests/
+├── requirements.txt
+├── runtime.txt
+├── Dockerfile
+└── README.md
 ```
+
+---
 
 ## Features
 
-- Data profiling: `missing_values`, `duplicate_rows`, `rating_distribution`, `sentiment_distribution`, `review_length`, and `review_length_outliers_iqr`.
-- Preprocessing: lowercasing, URL removal, HTML cleanup, emoji removal, punctuation removal, stopword removal, lightweight lemmatization, and whitespace normalization.
-- Sentiment labels: `Negative` for 1-2 stars, `Neutral` for 3 stars, and `Positive` for 4-5 stars.
-- Generated dataset fields: `review_text`, `rating_numeric`, `sentiment`, `review_length`, `clean_text`, and `sentiment_score`.
-- EDA plots: `rating_distribution.png`, `sentiment_distribution.png`, `frequent_words.png`, `review_length_analysis.png`, and `word_cloud.png`.
-- Model features: TF-IDF unigram and bigram features from `clean_text`, with up to 12,000 terms.
-- Model comparison: `Logistic Regression`, `Multinomial Naive Bayes`, `Random Forest`, and `XGBoost` when available.
-- Insights: keyword extraction, LDA topic modeling, and generated business insight summaries.
-- Streamlit pages: `Dashboard`, `Analytics`, `Prediction`, and `Insights`.
+### Data Profiling
+Automatic profiling covers missing values, duplicate rows, rating distribution, sentiment distribution, review length statistics.
+
+### Text Preprocessing
+Reviews are cleaned through a multi-step pipeline: lowercasing → URL removal → HTML cleanup → emoji removal → punctuation removal → stopword removal → lemmatization → whitespace normalization.
+
+### Sentiment Labeling
+Star ratings are mapped to three sentiment classes:
+
+| Stars | Label |
+|-------|-------|
+| 1–2 | Negative |
+| 3 | Neutral |
+| 4–5 | Positive |
+
+### Processed Dataset Fields
+Each processed record includes `review_text`, `rating_numeric`, `sentiment`, `review_length`, `clean_text`, and `sentiment_score`.
+
+### EDA Plots
+Five plots are generated automatically:
+- `rating_distribution.png`
+- `sentiment_distribution.png`
+- `frequent_words.png`
+- `review_length_analysis.png`
+- `word_cloud.png`
+
+### Model Training
+TF-IDF features (unigrams + bigrams, up to 12,000 terms) are extracted from `clean_text`. Four classifiers are trained and compared:
+- Logistic Regression
+- Multinomial Naive Bayes
+- Random Forest
+- XGBoost 
+
+### Business Insights
+The insights module runs keyword extraction, LDA topic modeling, and generates natural-language summaries of key patterns in the review corpus.
+
+### Streamlit App
+Four interactive pages: **Dashboard**, **Analytics**, **Prediction**, and **Insights**.
+
+---
 
 ## Installation
 
 ```bash
 python -m venv .venv
-.venv\Scripts\activate
+.venv\Scripts\activate          # Windows
+# source .venv/bin/activate     # macOS / Linux
+
 pip install -r requirements.txt
 pip install -e .
 ```
 
+---
+
 ## Usage
 
-Generate profiling reports, processed data, and plots:
-
+**Generate profiling reports, processed data, and plots (skip training):**
 ```bash
 python run_pipeline.py --skip-training
 ```
 
-Train and save the best model:
-
+**Train and save the best model:**
 ```bash
 python -m src.training.train_model
 ```
 
-Run the Streamlit app:
-
+**Launch the Streamlit app:**
 ```bash
 streamlit run app.py
 ```
 
-Run tests:
-
+**Run tests:**
 ```bash
 python -m unittest discover -s tests
 ```
 
+---
+
 ## Deployment
 
-Streamlit Community Cloud:
+### Streamlit Community Cloud
 
-1. Push this repository to GitHub.
+1. Push the repository to GitHub.
 2. Set `app.py` as the entry point.
 3. Ensure `requirements.txt` and `runtime.txt` are committed.
-4. Run `python run_pipeline.py` locally first if you want reports and model artifacts pre-generated.
+4. Optionally run `python run_pipeline.py` locally first to pre-generate reports and model artifacts.
 
-Render:
+### Render
 
-1. Create a new Web Service from the GitHub repository.
-2. Use `pip install -r requirements.txt` as the build command.
-3. Use `streamlit run app.py --server.address=0.0.0.0 --server.port=$PORT` as the start command.
+| Setting | Value |
+|---------|-------|
+| Build command | `pip install -r requirements.txt` |
+| Start command | `streamlit run app.py --server.address=0.0.0.0 --server.port=$PORT` |
 
-Docker:
+### Docker
 
 ```bash
 docker build -t customer-feedback-analysis .
 docker run -p 8501:8501 customer-feedback-analysis
 ```
 
-## Future Enhancements
+Then open `http://localhost:8501` in your browser.
 
-- Add transformer embeddings for semantic search and better sentiment modeling.
-- Add experiment tracking with MLflow.
-- Add drift monitoring for deployed review streams.
-- Add authenticated admin workflows for model retraining.
+---
+
+## Roadmap
+
+- [ ] Transformer-based embeddings for semantic search and richer sentiment modeling
+- [ ] Experiment tracking with MLflow
+- [ ] Data drift monitoring for deployed review streams
+- [ ] Authenticated admin workflows for on-demand model retraining
+
+---
+
