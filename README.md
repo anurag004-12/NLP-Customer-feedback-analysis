@@ -41,14 +41,15 @@ customer-feedback-analysis/
 
 ## Features
 
-- Data profiling: missing values, duplicates, outliers, class imbalance, review length.
-- Preprocessing: lowercasing, URL removal, HTML cleanup, emoji removal, punctuation removal, stopword removal, lemmatization, whitespace normalization.
-- Sentiment labels: 1-2 stars Negative, 3 stars Neutral, 4-5 stars Positive.
-- EDA: rating distribution, sentiment distribution, frequent words, word cloud, review length.
-- Feature engineering: TF-IDF, n-grams, review length, simple sentiment scores.
-- Model comparison: Logistic Regression, Multinomial Naive Bayes, Random Forest, XGBoost when available.
-- Advanced NLP: prediction, keyword extraction, LDA topic modeling, business insight generation, review-level summaries.
-- Streamlit app: Dashboard, Analytics, Prediction, Insights.
+- Data profiling: `missing_values`, `duplicate_rows`, `rating_distribution`, `sentiment_distribution`, `review_length`, and `review_length_outliers_iqr`.
+- Preprocessing: lowercasing, URL removal, HTML cleanup, emoji removal, punctuation removal, stopword removal, lightweight lemmatization, and whitespace normalization.
+- Sentiment labels: `Negative` for 1-2 stars, `Neutral` for 3 stars, and `Positive` for 4-5 stars.
+- Generated dataset fields: `review_text`, `rating_numeric`, `sentiment`, `review_length`, `clean_text`, and `sentiment_score`.
+- EDA plots: `rating_distribution.png`, `sentiment_distribution.png`, `frequent_words.png`, `review_length_analysis.png`, and `word_cloud.png`.
+- Model features: TF-IDF unigram and bigram features from `clean_text`, with up to 12,000 terms.
+- Model comparison: `Logistic Regression`, `Multinomial Naive Bayes`, `Random Forest`, and `XGBoost` when available.
+- Insights: keyword extraction, LDA topic modeling, and generated business insight summaries.
+- Streamlit pages: `Dashboard`, `Analytics`, `Prediction`, and `Insights`.
 
 ## Installation
 
