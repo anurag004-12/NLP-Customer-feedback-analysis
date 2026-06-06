@@ -1,0 +1,2 @@
+"""Insight generation package."""
+

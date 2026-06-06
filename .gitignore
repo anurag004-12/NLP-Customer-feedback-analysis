@@ -1,0 +1,46 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments and local installs
+.venv/
+venv/
+env/
+ENV/
+pip-wheel-metadata/
+*.egg-info/
+build/
+dist/
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+notebooks/.ipynb_checkpoints/
+
+# Generated or bulky data artifacts
+data/cleaned_reviews.csv
+data/combined_features.npy
+data/labels.npy
+data/linguistic_features.csv
+assets/reports/*.csv
+
+# Keep small demo artifacts trackable:
+# - models/*.pkl
+# - assets/plots/*.png
+# - assets/reports/*.json
+
+# Local configuration
+.env
+.env.*
+.vscode/
+.idea/
+
+# OS and editor noise
+.DS_Store
+Thumbs.db
+*.log

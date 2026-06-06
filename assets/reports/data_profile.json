@@ -1,0 +1,55 @@
+{
+  "rows": 21214,
+  "columns": 9,
+  "column_names": [
+    "Reviewer Name",
+    "Profile Link",
+    "Country",
+    "Review Count",
+    "Review Date",
+    "Rating",
+    "Review Title",
+    "Review Text",
+    "Date of Experience"
+  ],
+  "detected_text_column": "Review Text",
+  "detected_rating_column": "Rating",
+  "missing_values": {
+    "Reviewer Name": 0,
+    "Profile Link": 51,
+    "Country": 160,
+    "Review Count": 159,
+    "Review Date": 159,
+    "Rating": 159,
+    "Review Title": 159,
+    "Review Text": 159,
+    "Date of Experience": 267
+  },
+  "duplicate_rows": 2,
+  "rating_distribution": {
+    "1.0": 13123,
+    "2.0": 1227,
+    "3.0": 885,
+    "4.0": 1292,
+    "5.0": 4528,
+    "NaN": 159
+  },
+  "sentiment_distribution": {
+    "Negative": 14350,
+    "Positive": 5820,
+    "Neutral": 885,
+    "NaN": 159
+  },
+  "review_length": {
+    "mean": 83.20048081455643,
+    "median": 56.0,
+    "min": 0,
+    "max": 1783
+  },
+  "class_imbalance": {
+    "Negative": 0.681548325813346,
+    "Positive": 0.27641890287342674,
+    "Neutral": 0.04203277131322726
+  },
+  "review_length_outliers_iqr": 1341
+}
