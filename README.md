@@ -2,14 +2,11 @@
 
 > Production-ready NLP pipeline for analyzing Amazon customer reviews — from raw CSV to trained models and an interactive Streamlit dashboard.
 
+🚀 **Live Demo:** [nlp-customer-feedback-analysis.onrender.com](https://nlp-customer-feedback-analysis.onrender.com)
+
 ---
 
-<<<<<<< HEAD
-The repository includes `data/Amazon_Reviews.csv`. The loader supports review columns named `reviewText`, `Rating`, `Review Title`.
-For this dataset, the detected columns are:
-=======
 ## Overview
->>>>>>> 849c2d1ca1012b54d75ce60001544b360aa3b7e2
 
 This project automates the full sentiment analysis lifecycle: it auto-detects review and rating columns, cleans text, assigns sentiment labels from star ratings, generates EDA reports, trains and compares multiple ML classifiers, and surfaces insights through a multi-page Streamlit application.
 
@@ -27,6 +24,14 @@ This project automates the full sentiment analysis lifecycle: it auto-detects re
 ```text
 customer-feedback-analysis/
 ├── app.py                    # Streamlit entry point
+├── run_pipeline.py           # Pipeline runner script
+├── setup.py
+├── render.yaml               # Render deployment config
+├── DEPLOY_ON_RENDER.md       # Render deployment guide
+├── Dockerfile
+├── requirements.txt
+├── runtime.txt
+├── .gitignore
 ├── assets/
 │   ├── plots/                # Generated EDA plots
 │   └── reports/              # Profiling reports
@@ -34,6 +39,7 @@ customer-feedback-analysis/
 │   └── Amazon_Reviews.csv    # Source dataset
 ├── models/                   # Saved model artifacts
 ├── notebooks/                # Exploratory notebooks
+├── scripts/                  # Utility scripts
 ├── src/
 │   ├── components/
 │   ├── exceptions.py
@@ -45,11 +51,7 @@ customer-feedback-analysis/
 │   ├── training/
 │   ├── visualization/
 │   └── utils/
-├── tests/
-├── requirements.txt
-├── runtime.txt
-├── Dockerfile
-└── README.md
+└── tests/
 ```
 
 ---
@@ -57,7 +59,7 @@ customer-feedback-analysis/
 ## Features
 
 ### Data Profiling
-Automatic profiling covers missing values, duplicate rows, rating distribution, sentiment distribution, review length statistics.
+Automatic profiling covers missing values, duplicate rows, rating distribution, sentiment distribution, and review length statistics.
 
 ### Text Preprocessing
 Reviews are cleaned through a multi-step pipeline: lowercasing → URL removal → HTML cleanup → emoji removal → punctuation removal → stopword removal → lemmatization → whitespace normalization.
@@ -87,7 +89,7 @@ TF-IDF features (unigrams + bigrams, up to 12,000 terms) are extracted from `cle
 - Logistic Regression
 - Multinomial Naive Bayes
 - Random Forest
-- XGBoost 
+- XGBoost
 
 ### Business Insights
 The insights module runs keyword extraction, LDA topic modeling, and generates natural-language summaries of key patterns in the review corpus.
@@ -136,31 +138,9 @@ python -m unittest discover -s tests
 
 ## Deployment
 
-<<<<<<< HEAD
-### Render (Recommended)
-
-For detailed deployment instructions, see [DEPLOY_ON_RENDER.md](DEPLOY_ON_RENDER.md).
-
-Quick start:
-1. Push this repository to GitHub.
-2. Go to [Render Dashboard](https://dashboard.render.com)
-3. Create a new Web Service from this repository
-4. Select **Docker** as runtime
-5. Deploy automatically or via `render.yaml`
-
-=======
->>>>>>> 849c2d1ca1012b54d75ce60001544b360aa3b7e2
-### Streamlit Community Cloud
-
-1. Push the repository to GitHub.
-2. Set `app.py` as the entry point.
-3. Ensure `requirements.txt` and `runtime.txt` are committed.
-4. Optionally run `python run_pipeline.py` locally first to pre-generate reports and model artifacts.
-
-<<<<<<< HEAD
-### Docker (Local or Self-Hosted)
-=======
 ### Render
+
+For a full walkthrough see [DEPLOY_ON_RENDER.md]. The repo includes a `render.yaml` for one-click infrastructure-as-code deployment.
 
 | Setting | Value |
 |---------|-------|
@@ -168,7 +148,6 @@ Quick start:
 | Start command | `streamlit run app.py --server.address=0.0.0.0 --server.port=$PORT` |
 
 ### Docker
->>>>>>> 849c2d1ca1012b54d75ce60001544b360aa3b7e2
 
 ```bash
 docker build -t customer-feedback-analysis .
@@ -185,6 +164,3 @@ Then open `http://localhost:8501` in your browser.
 - [ ] Experiment tracking with MLflow
 - [ ] Data drift monitoring for deployed review streams
 - [ ] Authenticated admin workflows for on-demand model retraining
-
----
-
