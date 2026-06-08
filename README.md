@@ -4,7 +4,8 @@ Production-ready NLP project for analyzing Amazon customer reviews. It detects t
 
 ## Dataset
 
-The repository includes `data/Amazon_Reviews.csv`. The loader supports review columns named `reviewText`, `review_body`, `Review Text`, `review`, or similar, and rating columns named `overall`, `star_rating`, `rating`, or similar. For this dataset, the detected columns are:
+The repository includes `data/Amazon_Reviews.csv`. The loader supports review columns named `reviewText`, `Rating`, `Review Title`.
+For this dataset, the detected columns are:
 
 - Text: `Review Text`
 - Rating: `Rating`
@@ -88,20 +89,25 @@ python -m unittest discover -s tests
 
 ## Deployment
 
-Streamlit Community Cloud:
+### Render (Recommended)
+
+For detailed deployment instructions, see [DEPLOY_ON_RENDER.md](DEPLOY_ON_RENDER.md).
+
+Quick start:
+1. Push this repository to GitHub.
+2. Go to [Render Dashboard](https://dashboard.render.com)
+3. Create a new Web Service from this repository
+4. Select **Docker** as runtime
+5. Deploy automatically or via `render.yaml`
+
+### Streamlit Community Cloud
 
 1. Push this repository to GitHub.
 2. Set `app.py` as the entry point.
 3. Ensure `requirements.txt` and `runtime.txt` are committed.
 4. Run `python run_pipeline.py` locally first if you want reports and model artifacts pre-generated.
 
-Render:
-
-1. Create a new Web Service from the GitHub repository.
-2. Use `pip install -r requirements.txt` as the build command.
-3. Use `streamlit run app.py --server.address=0.0.0.0 --server.port=$PORT` as the start command.
-
-Docker:
+### Docker (Local or Self-Hosted)
 
 ```bash
 docker build -t customer-feedback-analysis .
